@@ -18,6 +18,9 @@ public class LoginPage {
     @FindBy(id = "login-button")
     private WebElement loginButton;
 
+    @FindBy(xpath = "//h3")
+    private WebElement errorMessage;
+
     public LoginPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
@@ -29,4 +32,29 @@ public class LoginPage {
         loginButton.click();
         return new ShopMainPage(driver);
     }
+
+    public LoginPage loginWithInValidData(String username, String password) {
+        usernameInputField.sendKeys(username);
+        passwordInputField.sendKeys(password);
+        loginButton.click();
+        return this;
+    }
+
+    public LoginPage loginWithoutUsername(String password) {
+        passwordInputField.sendKeys(password);
+        loginButton.click();
+        return this;
+    }
+
+    public LoginPage loginWithoutPassword(String username) {
+        usernameInputField.sendKeys(username);
+        loginButton.click();
+        return this;
+    }
+
+    public WebElement getErrorMessage() {
+        return errorMessage;
+    }
+
+
 }
