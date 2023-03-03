@@ -10,7 +10,7 @@ public class LoginTests extends BaseTest {
     private String invalidDataError = "Epic sadface: Username and password do not match any user in this service";
 
     @Test
-    public void loginTestValidData() {
+    private void loginTestValidData() {
         ShopMainPage shopMainPage = new LoginPage(driver)
                 .loginWithValidData("standard_user", "secret_sauce");
 
@@ -18,7 +18,7 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public void loginTestInValidData() {
+    private void loginTestInValidData() {
         LoginPage loginPage = new LoginPage(driver)
                 .loginWithInValidData("random_username", "random_password");
 
@@ -27,7 +27,7 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public void loginTestWithoutUsername() {
+    private void loginTestWithoutUsername() {
         LoginPage loginPage = new LoginPage(driver)
                 .loginWithoutUsername("secret_sauce");
 
@@ -36,7 +36,7 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public void loginTestWithoutPassword() {
+    private void loginTestWithoutPassword() {
         LoginPage loginPage = new LoginPage(driver)
                 .loginWithoutPassword("standard_user");
 
