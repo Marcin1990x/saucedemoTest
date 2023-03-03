@@ -19,6 +19,9 @@ public class ShopMainPage {
     @FindBy(xpath = "//div[@class='inventory_item_name']")
     private List<WebElement> shopItemNames;
 
+    @FindBy(xpath = "//div[@class='inventory_item_price']")
+    private List<WebElement> shopItemPrices;
+
     private WebDriver driver;
 
     public ShopMainPage(WebDriver driver) {
@@ -38,6 +41,9 @@ public class ShopMainPage {
 
     public List<WebElement> getShopItemNames() {
         return shopItemNames;
+    }
+    public List<WebElement> getShopItemPrices() {
+        return shopItemPrices;
     }
 
 }
