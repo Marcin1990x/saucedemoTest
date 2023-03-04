@@ -1,5 +1,6 @@
 package tests;
 
+import models.User;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LoginPage;
@@ -12,15 +13,19 @@ public class LoginTests extends BaseTest {
     @Test
     private void loginTestValidData() {
         ShopMainPage shopMainPage = new LoginPage(driver)
-                .loginWithValidData("standard_user", "secret_sauce");
+                .loginWithValidData(User.getUsername(), User.getPassword());
 
         Assert.assertEquals(shopMainPage.getShopMainPageHeading().getText(), "Products");
     }
 
     @Test
     private void loginTestInValidData() {
+
+        User.setUsername("random_username");
+        User.setPassword("random_password");
+
         LoginPage loginPage = new LoginPage(driver)
-                .loginWithInValidData("random_username", "random_password");
+                .loginWithInValidData(User.getUsername(), User.getPassword());
 
         Assert.assertTrue(loginPage.getErrorMessage().isDisplayed());
         Assert.assertEquals(loginPage.getErrorMessage().getText(), invalidDataError);
@@ -29,7 +34,7 @@ public class LoginTests extends BaseTest {
     @Test
     private void loginTestWithoutUsername() {
         LoginPage loginPage = new LoginPage(driver)
-                .loginWithoutUsername("secret_sauce");
+                .loginWithoutUsername(User.getPassword());
 
         Assert.assertTrue(loginPage.getErrorMessage().isDisplayed());
         Assert.assertEquals(loginPage.getErrorMessage().getText(), "Epic sadface: Username is required");
@@ -38,7 +43,7 @@ public class LoginTests extends BaseTest {
     @Test
     private void loginTestWithoutPassword() {
         LoginPage loginPage = new LoginPage(driver)
-                .loginWithoutPassword("standard_user");
+                .loginWithoutPassword(User.getUsername());
 
         Assert.assertTrue(loginPage.getErrorMessage().isDisplayed());
         Assert.assertEquals(loginPage.getErrorMessage().getText(), "Epic sadface: Password is required");
@@ -46,8 +51,11 @@ public class LoginTests extends BaseTest {
 
     @Test
     private void loginTestBlockedUser() {
+
+        User.setUsername("locked_out_user");
+
         LoginPage loginPage = new LoginPage(driver)
-                .loginWithInValidData("locked_out_user", "secret_sauce");
+                .loginWithInValidData(User.getUsername(), User.getPassword());
 
         Assert.assertTrue(loginPage.getErrorMessage().isDisplayed());
         Assert.assertEquals(loginPage.getErrorMessage().getText(), "Epic sadface: Sorry, this user has been locked out.");
