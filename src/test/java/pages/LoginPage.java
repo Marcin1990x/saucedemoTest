@@ -21,6 +21,9 @@ public class LoginPage {
     @FindBy(xpath = "//h3")
     private WebElement errorMessage;
 
+    @FindBy(xpath = "//div[text()='Swag Labs']")
+    private WebElement mainHeading;
+
     public LoginPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
@@ -54,6 +57,10 @@ public class LoginPage {
 
     public WebElement getErrorMessage() {
         return errorMessage;
+    }
+
+    public WebElement getMainHeading() {
+        return mainHeading;
     }
 
 
