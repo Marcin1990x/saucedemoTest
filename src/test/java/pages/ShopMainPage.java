@@ -28,6 +28,12 @@ public class ShopMainPage {
     @FindBy(id = "logout_sidebar_link")
     private WebElement logoutButton;
 
+    @FindBy(id = "add-to-cart-sauce-labs-backpack")
+    private WebElement productBackpack;
+
+    @FindBy(id = "shopping_cart_container")
+    private WebElement shopingCartButton;
+
     private WebDriver driver;
 
     public ShopMainPage(WebDriver driver) {
@@ -51,11 +57,17 @@ public class ShopMainPage {
         return new LoginPage(driver);
     }
 
+    public YourCartPage addToCart() {
+        productBackpack.click();
+        shopingCartButton.click();
+        return new YourCartPage(driver);
+    }
+
     public List<WebElement> getShopItemNames() {
         return shopItemNames;
     }
 
-        public List<WebElement> getShopItemPrices () {
-            return shopItemPrices;
-        }
+    public List<WebElement> getShopItemPrices() {
+        return shopItemPrices;
+    }
 }
