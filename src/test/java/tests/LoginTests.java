@@ -43,4 +43,13 @@ public class LoginTests extends BaseTest {
         Assert.assertTrue(loginPage.getErrorMessage().isDisplayed());
         Assert.assertEquals(loginPage.getErrorMessage().getText(), "Epic sadface: Password is required");
     }
+
+    @Test
+    private void loginTestBlockedUser() {
+        LoginPage loginPage = new LoginPage(driver)
+                .loginWithInValidData("locked_out_user", "secret_sauce");
+
+        Assert.assertTrue(loginPage.getErrorMessage().isDisplayed());
+        Assert.assertEquals(loginPage.getErrorMessage().getText(), "Epic sadface: Sorry, this user has been locked out.");
+    }
 }
