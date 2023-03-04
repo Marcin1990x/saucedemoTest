@@ -22,6 +22,12 @@ public class ShopMainPage {
     @FindBy(xpath = "//div[@class='inventory_item_price']")
     private List<WebElement> shopItemPrices;
 
+    @FindBy(id = "react-burger-menu-btn")
+    private WebElement menuButton;
+
+    @FindBy(id = "logout_sidebar_link")
+    private WebElement logoutButton;
+
     private WebDriver driver;
 
     public ShopMainPage(WebDriver driver) {
@@ -39,11 +45,17 @@ public class ShopMainPage {
         return this;
     }
 
+    public LoginPage logout() {
+        menuButton.click();
+        logoutButton.click();
+        return new LoginPage(driver);
+    }
+
     public List<WebElement> getShopItemNames() {
         return shopItemNames;
     }
-    public List<WebElement> getShopItemPrices() {
-        return shopItemPrices;
-    }
 
+        public List<WebElement> getShopItemPrices () {
+            return shopItemPrices;
+        }
 }
