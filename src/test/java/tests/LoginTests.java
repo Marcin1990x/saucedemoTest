@@ -10,10 +10,13 @@ public class LoginTests extends BaseTest {
 
     private String invalidDataError = "Epic sadface: Username and password do not match any user in this service";
 
+    private User user = new User("standard_user", "secret_sauce");
+
     @Test
     private void loginTestValidData() {
+
         ShopMainPage shopMainPage = new LoginPage(driver)
-                .loginWithValidData(User.getUsername(), User.getPassword());
+                .loginWithValidData(user.getUsername(), user.getPassword());
 
         Assert.assertEquals(shopMainPage.getShopMainPageHeading().getText(), "Products");
     }
@@ -21,11 +24,10 @@ public class LoginTests extends BaseTest {
     @Test
     private void loginTestInValidData() {
 
-        User.setUsername("random_username");
-        User.setPassword("random_password");
+        User user1 = new User("random_user", "random_sauce");
 
         LoginPage loginPage = new LoginPage(driver)
-                .loginWithInValidData(User.getUsername(), User.getPassword());
+                .loginWithInValidData(user1.getUsername(), user1.getPassword());
 
         Assert.assertTrue(loginPage.getErrorMessage().isDisplayed());
         Assert.assertEquals(loginPage.getErrorMessage().getText(), invalidDataError);
@@ -33,8 +35,9 @@ public class LoginTests extends BaseTest {
 
     @Test
     private void loginTestWithoutUsername() {
+
         LoginPage loginPage = new LoginPage(driver)
-                .loginWithoutUsername(User.getPassword());
+                .loginWithoutUsername(user.getPassword());
 
         Assert.assertTrue(loginPage.getErrorMessage().isDisplayed());
         Assert.assertEquals(loginPage.getErrorMessage().getText(), "Epic sadface: Username is required");
@@ -42,8 +45,9 @@ public class LoginTests extends BaseTest {
 
     @Test
     private void loginTestWithoutPassword() {
+
         LoginPage loginPage = new LoginPage(driver)
-                .loginWithoutPassword(User.getUsername());
+                .loginWithoutPassword(user.getUsername());
 
         Assert.assertTrue(loginPage.getErrorMessage().isDisplayed());
         Assert.assertEquals(loginPage.getErrorMessage().getText(), "Epic sadface: Password is required");
@@ -52,10 +56,10 @@ public class LoginTests extends BaseTest {
     @Test
     private void loginTestBlockedUser() {
 
-        User.setUsername("locked_out_user");
+        User userBlocked = new User("locked_out_user", "secret_sauce");
 
         LoginPage loginPage = new LoginPage(driver)
-                .loginWithInValidData(User.getUsername(), User.getPassword());
+                .loginWithInValidData(userBlocked.getUsername(), userBlocked.getPassword());
 
         Assert.assertTrue(loginPage.getErrorMessage().isDisplayed());
         Assert.assertEquals(loginPage.getErrorMessage().getText(), "Epic sadface: Sorry, this user has been locked out.");

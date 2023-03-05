@@ -2,37 +2,42 @@ package models;
 
 public class User {
 
-    private static String firstName = "Marian";
-    private static String lastName = "Best";
-    private static String postalCode = "14-100";
-    private static String username = "standard_user";
-    private static String password = "secret_sauce";
+    private String firstName = "Marian";
+    private String lastName = "Best";
+    private String postalCode = "14-100";
+    private String username;
+    private String password;
 
-    public static void setUsername(String username) {
-        User.username = username;
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
-    public static void setPassword(String password) {
-        User.password = password;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public static String getFirstName() {
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFirstName() {
         return firstName;
     }
 
-    public static String getLastName() {
+    public String getLastName() {
         return lastName;
     }
 
-    public static String getPostalCode() {
+    public String getPostalCode() {
         return postalCode;
     }
 
-    public static String getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    public static String getPassword() {
+    public String getPassword() {
         return password;
     }
 
