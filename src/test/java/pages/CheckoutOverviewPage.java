@@ -10,6 +10,13 @@ public class CheckoutOverviewPage {
     @FindBy(id = "finish")
     private WebElement finishButton;
 
+    @FindBy(xpath = "//div[@class='summary_subtotal_label']")
+    private WebElement totalPriceWithoutTax;
+
+    @FindBy(xpath = "//div[@class='inventory_item_name']")
+    private WebElement boughtProduct;
+
+
     private WebDriver driver;
 
     public CheckoutOverviewPage(WebDriver driver) {
@@ -20,5 +27,13 @@ public class CheckoutOverviewPage {
     public CompletePage finishBuying() {
         finishButton.click();
         return new CompletePage(driver);
+    }
+
+    public WebElement getTotalPriceWithoutTax() {
+        return totalPriceWithoutTax;
+    }
+
+    public WebElement getBoughtProduct() {
+        return boughtProduct;
     }
 }
