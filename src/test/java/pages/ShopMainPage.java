@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import utils.SeleniumHelper;
 
 import java.util.List;
 
@@ -53,6 +54,7 @@ public class ShopMainPage {
 
     public LoginPage logout() {
         menuButton.click();
+        SeleniumHelper.waitForElementToBeClickable(logoutButton, driver);
         logoutButton.click();
         return new LoginPage(driver);
     }

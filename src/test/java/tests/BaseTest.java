@@ -13,8 +13,7 @@ public class BaseTest {
 
     @BeforeMethod
     public void setup() {
-        driver = DriverFactory.getDriver("chrome");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver = DriverFactory.getDriver("edge");
         driver.get("https://www.saucedemo.com/");
         driver.manage().window().maximize();
     }
