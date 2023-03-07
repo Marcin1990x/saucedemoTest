@@ -7,10 +7,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverFactory {
 
-    public static WebDriver getDriver(String browserName)
-    {
-        switch (browserName)
-        {
+    public static WebDriver getDriver(String browserName) {
+        switch (browserName) {
             case "chrome":
                 return new ChromeDriver();
             case "firefox":
@@ -18,7 +16,7 @@ public class DriverFactory {
             case "edge":
                 return new EdgeDriver();
         }
-        return null;
+        return new ChromeDriver();
     }
 
 }
