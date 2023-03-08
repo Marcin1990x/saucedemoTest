@@ -18,9 +18,6 @@ public class CheckoutPage {
 
     @FindBy(id = "continue")
     private WebElement continueButton;
-
-
-
     private WebDriver driver;
 
     public CheckoutPage(WebDriver driver) {
@@ -35,7 +32,4 @@ public class CheckoutPage {
         continueButton.click();
         return new CheckoutOverviewPage(driver);
     }
-
-
-
 }

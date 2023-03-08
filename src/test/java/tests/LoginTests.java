@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.ShopMainPage;
+import utils.DataProviderClass;
 
 public class LoginTests extends BaseTest {
 
@@ -21,7 +22,7 @@ public class LoginTests extends BaseTest {
         Assert.assertEquals(shopMainPage.getShopMainPageHeading().getText(), "Products");
     }
 
-    @Test
+    @Test(dataProvider = "login-data", dataProviderClass = DataProviderClass.class)
     private void loginTestInValidData() {
 
         User user1 = new User("random_user", "random_sauce");
