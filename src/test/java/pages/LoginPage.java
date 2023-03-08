@@ -36,23 +36,22 @@ public class LoginPage {
         return new ShopMainPage(driver);
     }
 
-    public LoginPage loginWithInValidData(String username, String password) {
+    public void putUsername(String username) {
         usernameInputField.sendKeys(username);
+    }
+
+    public void putPassword(String password) {
         passwordInputField.sendKeys(password);
+    }
+
+    public LoginPage clickLoginButton() {
         loginButton.click();
         return this;
     }
 
-    public LoginPage loginWithoutUsername(String password) {
-        passwordInputField.sendKeys(password);
+    public ShopMainPage clickLoginButton2() {
         loginButton.click();
-        return this;
-    }
-
-    public LoginPage loginWithoutPassword(String username) {
-        usernameInputField.sendKeys(username);
-        loginButton.click();
-        return this;
+        return new ShopMainPage(driver);
     }
 
     public WebElement getErrorMessage() {
