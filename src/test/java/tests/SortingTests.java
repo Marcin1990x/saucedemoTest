@@ -1,5 +1,6 @@
 package tests;
 
+import com.aventstack.extentreports.ExtentTest;
 import models.User;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -8,6 +9,7 @@ import pages.LoginPage;
 import pages.ShopMainPage;
 import utils.Sorting;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,10 +22,12 @@ public class SortingTests extends BaseTest {
     private User user = new User("standard_user", "secret_sauce");
 
     @Test
-    private void sortTest() {
+    private void sortTest() throws IOException {
+
+        ExtentTest test = extentReports.createTest("Sorting products test.");
 
         ShopMainPage shopMainPage = new LoginPage(driver)
-                .loginWithValidData(user.getUsername(), user.getPassword())
+                .loginWithValidData(user.getUsername(), user.getPassword(), test)
                 .filterProducts(sortSelectors[sortType]);
 
         //Get product names

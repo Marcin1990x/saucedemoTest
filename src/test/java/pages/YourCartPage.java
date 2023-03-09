@@ -1,10 +1,15 @@
 package pages;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utils.ScreenshotMaker;
+
+import java.io.IOException;
 
 public class YourCartPage {
 
@@ -24,7 +29,8 @@ public class YourCartPage {
         this.driver = driver;
     }
 
-    public CheckoutPage checkout() {
+    public CheckoutPage checkout(ExtentTest test) throws IOException {
+        test.log(Status.INFO, "Checkout stage.", ScreenshotMaker.getScreenshot(driver));
         checkoutButton.click();
         return new CheckoutPage(driver);
     }

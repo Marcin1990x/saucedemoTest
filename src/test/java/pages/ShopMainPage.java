@@ -1,12 +1,16 @@
 package pages;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import utils.ScreenshotMaker;
 import utils.SeleniumHelper;
 
+import java.io.IOException;
 import java.util.List;
 
 public class ShopMainPage {
@@ -59,8 +63,10 @@ public class ShopMainPage {
         return new LoginPage(driver);
     }
 
-    public YourCartPage addToCart() {
+    public YourCartPage addToCart(ExtentTest test) throws IOException {
+        test.log(Status.INFO, "Add to shopping cart stage.");
         productBackpack.click();
+        test.log(Status.PASS, "Product added to shopping cart.", ScreenshotMaker.getScreenshot(driver));
         shopingCartButton.click();
         return new YourCartPage(driver);
     }

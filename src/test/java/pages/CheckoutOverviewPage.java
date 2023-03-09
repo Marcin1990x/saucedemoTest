@@ -1,9 +1,14 @@
 package pages;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utils.ScreenshotMaker;
+
+import java.io.IOException;
 
 public class CheckoutOverviewPage {
 
@@ -24,7 +29,8 @@ public class CheckoutOverviewPage {
         this.driver = driver;
     }
 
-    public CompletePage finishBuying() {
+    public CompletePage finishBuying(ExtentTest test) throws IOException {
+        test.log(Status.INFO, "Finish buying stage", ScreenshotMaker.getScreenshot(driver));
         finishButton.click();
         return new CompletePage(driver);
     }

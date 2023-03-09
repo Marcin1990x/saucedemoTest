@@ -1,9 +1,14 @@
 package pages;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utils.ScreenshotMaker;
+
+import java.io.IOException;
 
 public class LoginPage {
 
@@ -29,9 +34,12 @@ public class LoginPage {
         this.driver = driver;
     }
 
-    public ShopMainPage loginWithValidData(String username, String password) {
+    public ShopMainPage loginWithValidData(String username, String password, ExtentTest test) throws IOException {
+        test.log(Status.INFO, "Login stage.");
         usernameInputField.sendKeys(username);
+        test.log(Status.PASS, "Username passed.");
         passwordInputField.sendKeys(password);
+        test.log(Status.PASS, "Password passed.", ScreenshotMaker.getScreenshot(driver));
         loginButton.click();
         return new ShopMainPage(driver);
     }
